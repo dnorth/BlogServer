@@ -1,0 +1,3 @@
+module.exports = {
+    url: 'mongodb://blogWriteUser:writeToo@narwhallife.com:27017/Blog'
+};

@@ -1,0 +1,25 @@
+// set up ====================================================
+var express = require('express');
+var app = express();
+var port = 9005;
+var database = require('./config/database');
+var db;
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect(database.url, function(err, database) {
+	if(err) throw err;
+	db = database;
+	console.log("Connected to the database.");
+	console.log(db);
+    });
+console.log(db);
+//var bodyParser = require('body-parser');
+
+// configuration =============================================
+app.use('/', express.static('./public'));
+
+// routes ====================================================
+require('./app/routes.js')(app, db);
+
+// listen ====================================================
+app.listen(port);
+console.log("App listening on port: " + port);
